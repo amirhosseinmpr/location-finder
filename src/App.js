@@ -9,8 +9,8 @@ import Map from './components/Map/Map';
 const App = () => {
   const [places, setPlaces] = useState([]);
 
-  const [coordinates, setCoordinates] = useState();
-  const [bounds, setBounds] = useState({});
+  const [coordinates, setCoordinates] = useState({});
+  const [bounds, setBounds] = useState([]);
 
   //give automatic location for map
   useEffect(() => {
@@ -23,7 +23,6 @@ const App = () => {
 
   useEffect(() => {
     getPlaceData(bounds.sw, bounds.ne).then(data => {
-      console.log(data);
       setPlaces(data);
     });
   }, [coordinates, bounds]);
