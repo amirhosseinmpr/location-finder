@@ -10,7 +10,7 @@ const App = () => {
   const [places, setPlaces] = useState([]);
 
   const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState([]);
+  const [bounds, setBounds] = useState({});
 
   //give automatic location for map
   useEffect(() => {
