@@ -20,5 +20,6 @@ export default makeStyles(() => ({
   },
   pointer: {
     cursor: 'pointer',
+    width: '82px',
   },
 }));
