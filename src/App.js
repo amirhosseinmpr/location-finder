@@ -14,6 +14,9 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [childClick, setChildClick] = useState(null);
 
+  const [type, setType] = useState('restaurants');
+  const [rating, setRating] = useState('');
+
   //give automatic location for map
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -26,18 +29,26 @@ const App = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    getPlaceData(bounds.sw, bounds.ne).then(data => {
+    getPlaceData(type, bounds.sw, bounds.ne).then(data => {
       setPlaces(data);
       setIsLoading(false);
     });
-  }, [coordinates, bounds]);
+  }, [type, coordinates, bounds]);
   return (
     <>
       <CssBaseline />
       <Header />
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
-          <List places={places} childClick={childClick} isLoading={isLoading} />
+          <List
+            places={places}
+            childClick={childClick}
+            isLoading={isLoading}
+            type={type}
+            setType={setType}
+            rating={rating}
+            setRating={setRating}
+          />
         </Grid>
         <Grid item xs={12} md={8}>
           <Map
