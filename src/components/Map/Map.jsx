@@ -4,8 +4,10 @@ import { Typography, useMediaQuery } from '@material-ui/core';
 import LocationOnOutlineIcon from '@material-ui/icons/LocationOnOutlined';
 
 import Paper from '@mui/material/Paper';
-import useStyles from './MapStyles';
+import useStyles from './styles';
 import Rating from '@mui/material/Rating';
+
+import mapStyles from './mapStyles';
 
 const Map = ({
   setCoordinates,
@@ -25,7 +27,11 @@ const Map = ({
         center={coordinates}
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
-        options={''}
+        options={{
+          disableDefaultUI: true,
+          zoomControl: true,
+          styles: mapStyles,
+        }}
         onChildClick={child => setChildClick(child)}
         onChange={e => {
           setCoordinates = { lat: e.center.lat, lng: e.center.lng };

@@ -29,7 +29,7 @@ const App = () => {
   useEffect(() => {
     const Filterplaces = places.filter(place => place.rating > rating);
     setFilterPlaces(Filterplaces);
-  }, [rating]);
+  }, [places, rating]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,7 +43,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <Header />
+      <Header setCoordinates={setCoordinates} />
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List
