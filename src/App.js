@@ -9,6 +9,7 @@ import Map from './components/Map/Map';
 const App = () => {
   const [places, setPlaces] = useState([]);
 
+  const [filterplaces, setFilterPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -25,12 +26,17 @@ const App = () => {
       }
     );
   }, []);
+  useEffect(() => {
+    const Filterplaces = places.filter(place => place.rating > rating);
+    setFilterPlaces(Filterplaces);
+  }, [rating]);
 
   useEffect(() => {
     setIsLoading(true);
 
     getPlaceData(type, bounds.sw, bounds.ne).then(data => {
       setPlaces(data);
+      setFilterPlaces([]);
       setIsLoading(false);
     });
   }, [type, coordinates, bounds]);
@@ -41,7 +47,7 @@ const App = () => {
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List
-            places={places}
+            places={filterplaces.length ? filterplaces : places}
             childClick={childClick}
             isLoading={isLoading}
             type={type}
@@ -55,7 +61,7 @@ const App = () => {
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
-            places={places}
+            places={filterplaces.length ? filterplaces : places}
             setChildClick={setChildClick}
           />
         </Grid>
